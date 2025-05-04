@@ -18,7 +18,6 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Views da interface
     private FrameLayout adContainerView;
     private AdView adView;
     private InterstitialAd mInterstitialAd;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button showInterstitialAdButton;
     private Button showRewardedAdButton;
 
-    // IDs de teste do AdMob (substitua pelos seus em produção)
+    // IDs de teste do AdMob (substituir pelos IDs gerados na plataforma Google AdMob)
     private static final String BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
     private static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
     private static final String REWARDED_AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         // Inicializa o SDK do Google Mobile Ads
         MobileAds.initialize(this, initializationStatus -> {});
 
-        // Liga os elementos do layout às variáveis
         adContainerView = findViewById(R.id.ad_view_container);
         showInterstitialAdButton = findViewById(R.id.load_interstitial_button);
         showRewardedAdButton = findViewById(R.id.load_rewarded_button);
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Carrega o anúncio recompensado (ex. ganhar moedas após assistir)
+    // Carrega o anúncio recompensado
     private void loadRewardedAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
         RewardedAd.load(this, REWARDED_AD_UNIT_ID, adRequest, new RewardedAdLoadCallback() {
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Exibe o anúncio recompensado e mostra o diálogo após assistir
+    // Exibe o anúncio recompensado e mostra o aviso após assistir
     private void showRewardedAd() {
         if (mRewardedAd != null) {
             mRewardedAd.show(this, rewardItem -> {
@@ -110,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Mostra uma caixa de diálogo com a recompensa
+    // Mostra uma aviso de recompensa
     private void showRewardDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Parabéns!")
                 .setMessage("Você ganhou 5 moedas.")
-                .setPositiveButton("OK", null)
+                .setPositiveButton("Fechar", null)
                 .show();
     }
 
